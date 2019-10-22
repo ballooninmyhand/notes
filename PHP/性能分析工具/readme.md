@@ -22,7 +22,7 @@
 
 #### 安装 PHP mongodb 扩展
 
-- 在 [用Docker创建一个PHP镜像](../快速构建服务环境/用Docker创建一个PHP镜像.md) 中已经演示了如何添加 mongodb 扩展
+- 在 [用Docker创建一个PHP镜像](<https://luo-ding.github.io/notes/Docker/%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E7%8E%AF%E5%A2%83/%E7%94%A8Docker%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAPHP%E9%95%9C%E5%83%8F.html>) 中已经演示了如何添加 mongodb 扩展
 
 ![image-20191016105721241](./images/image-php-mongodb.png)
 
@@ -30,7 +30,7 @@
 
 #### 安装 PHP tideways 扩展
 
-- 在 [用Docker创建一个PHP镜像](../快速构建服务环境/用Docker创建一个PHP镜像.md) 中已经演示了如何添加 tideways 扩展
+- 在 [用Docker创建一个PHP镜像](<https://luo-ding.github.io/notes/Docker/%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E7%8E%AF%E5%A2%83/%E7%94%A8Docker%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAPHP%E9%95%9C%E5%83%8F.html>) 中已经演示了如何添加 tideways 扩展
 
 ![image-20191016110620194](./images/image-php-tideways.png)
 
