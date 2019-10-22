@@ -14,19 +14,19 @@
 
 ### Mac
 
-- [mac安装sshpass连接ssh](./Mac/mac 安装 sshpass 连接 ssh.md)
+- [mac安装sshpass连接ssh](./Mac/mac安装sshpass连接ssh.md)
 
 
 
 ### MySQL
 
-- [MySQL中explain命令详解](./MySQL/MySQL 中 explain 命令详解.md)
+- [MySQL中explain命令详解](./MySQL/MySQL中explain命令详解.md)
 
 
 
 ### Nginx
 
-- [Nginx域名重定向](./Nginx/nginx 域名重定向.md)
+- [Nginx域名重定向](./Nginx/nginx域名重定向.md)
 
 
 
