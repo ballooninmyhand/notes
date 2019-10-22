@@ -2,8 +2,10 @@
 
 **安装背景：**  ssh连接远程服务器居然要输入密码，每次都要输入感觉很难受，为了偷懒，所以安装sshpass明文自动输入密码登录
 
-----
-###  安装sshpass
+
+
+### 安装sshpass
+
 试图使用homebrew安装
 > brew install sshpass  
 > Error: No available formula with the name "sshpass"  
