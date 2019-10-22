@@ -68,8 +68,8 @@ RUN curl -sS https://getcomposer.org/installer | \
 5. 上传镜像到阿里云镜像仓库
 
 ```shell
-# 登录，密码为 Banma123
-docker login --username=weixin@banmatrip.com registry.cn-shanghai.aliyuncs.com
+# 登录
+docker login --username=18852951201@163.com registry.cn-shanghai.aliyuncs.com
 # 修改镜像的标签和仓库地址
 docker tag [IMAGE ID] registry.cn-shanghai.aliyuncs.com/bmtrip/php
 # 推送到镜像仓库
