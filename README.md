@@ -12,6 +12,12 @@
 
 
 
+### Linux
+
+- [使用wkhtmltopdf将html文件转为pdf或图片](./Linux/使用wkhtmltopdf将html转为pdf或图片.md)
+
+
+
 ### Mac
 
 - [mac安装sshpass连接ssh](./Mac/mac安装sshpass连接ssh.md)
