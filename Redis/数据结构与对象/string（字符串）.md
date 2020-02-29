@@ -1,0 +1,83 @@
+## 介绍
+
+string（字符串）是 `Redis` 中最常见的数据存储类型，其底层实现是**简单动态字符串 SDS（simple dynamic string）**，是可以修改的字符串。
+
+
+
+## SDS
+
+#### 定义
+
+在 [sds.h](https://github.com/antirez/redis/blob/unstable/src/sds.h) 中定义，如下图：
+
+![image-20200229172943217](https://tva1.sinaimg.cn/large/00831rSTgy1gcdeh7x4ysj313g0u0qm7.jpg)
+
+每个 `sds.h/sdshdr` 结构表示一个 SDS 值，SDS 结构一共有五种 Header 定义，其目的是为了满足不同长度的字符串可以使用不同大小的 Header，从而节省内存：
+
+```c
+struct __attribute__ ((__packed__)) sdshdr16 {
+  	// 记录 buf 数组中已使用字节的数量
+  	// 等于 SDS 所保存字符串的长度
+    uint16_t len;
+  	// 排除头和空终止符以外分配的字节数量，表示字符串最大长度
+    uint16_t alloc;
+  	// 表示 header 的类型
+    unsigned char flags;
+    // 字节数组，用于保存字符串
+    char buf[];
+};
+```
+
+
+
+#### 特点
+
+1. 常数复杂度获取字符串长度
+
+- SDS 在 len 属性中记录了 SDS 本身的长度，所以获取一个 SDS 长度的复杂度仅为 O(1)，获取字符串长度的工作不会成为Redis的性能瓶颈
+
+2. 杜绝缓冲区溢出
+
+- 当 SDS API 需要对 SDS 进行修改时，API 会先检查 SDS 的空间是否满足修改所需的长度，如不满足，API 会自动扩容 SDS 的空间，满足执行修改所需
+
+3. 减少修改字符串时带来的内存重分配次数
+
+- 空间预分配策略
+  - 如果对 SDS 修改之后，SDS 的长度（即 len 属性的值）小于 **SDS_MAX_PREALLOC** 时，那么程序分配和len 属性同样大小的未使用空间
+  - 如果对 SDS 修改之后，SDS 的长度大于等于 **SDS_MAX_PREALLOC** 时，程序会分配 **SDS_MAX_PREALLOC** 大小的未使用空间，避免未使用空间过大而导致浪费
+  - **SDS_MAX_PREALLOC** 定义在 [sds.h](https://github.com/antirez/redis/blob/unstable/src/sds.h) 中，默认是 1024 * 1024，也就是1MB
+- 惰性空间释放策略
+  - 用于优化 SDS 缩短操作
+  - 当 SDS 的 API 需要缩短 SDS 保存的字符串时，程序并不立即使用内存重分配来回收缩短后多出来的字节，而是使用表头的 free 成员将这些字节的数量记录起来，并等待将来使用
+
+4. 二进制安全
+
+- 传统C字符串符合 ACSII 编码，这种编码的操作的特点就是：**遇零则止** 。即字符串里面不能包含空字符，否则最先被程序读入的空字符将被误认为是字符串结尾，这些限制使得C字符串只能保存文本数据，而不能保存像图片、音频、视频、压缩文件这样的二进制数据
+
+- SDS 表头的 **buf** 被定义为**字节数组**，因为判断是否到达字符串结尾的依据是表头的 **len** 属性，这意味着它可以存放**任何二进制的数据和文本数据**，包括**’\0’**
+
+5. 兼容部分 C 字符串函数
+
+- SDS 字符串遵循 C 字符串以空字符结尾的惯例，SDS 可以在有需要时重用 C 函数库，从而避免了不必要的代码重复
+
+#### API
+
+下面是 SDS 的主要操作 API，也在 [sds.h](https://github.com/antirez/redis/blob/unstable/src/sds.h) 和 [sds.c](https://github.com/antirez/redis/blob/unstable/src/sds.c) 中定义：
+
+| API      | 作用                                                | 时间复杂度                                                   |
+| -------- | --------------------------------------------------- | ------------------------------------------------------------ |
+| sdslen   | 返回 SDS 的已使用空间字节数                         | 这个值可以通过读取 SDS 的 len 属性直接获得，复杂度为 O(1)    |
+| sdsavail | 返回 SDS 的未使用空间字节数                         | 这个值可以通过读取 SDS 的 len 和 alloc 属性计算获得，复杂度为 O(1) |
+| sdsalloc | 返回 SDS 的最大字节数                               | 这个值可以通过读取 SDS 的 alloc 属性直接获得，复杂度为 O(1)，sdsalloc() = sdsavail() + sdslen() |
+| sdsnew   | 创建一个包含给定字符串的 SDS                        | O(N)，N 为给定字符串的长度                                   |
+| sdsempty | 创建一个不包含任何内容的 SDS                        | O(1)                                                         |
+| sdsdup   | 创建一个给定 SDS 的副本                             | O(N)，N 为给定 SDS 的长度                                    |
+| sdsfree  | 释放给定的 SDS                                      | O(N)，N 为被释放的 SDS 的长度                                |
+| sdsclear | 清空 SDS 保存的字符串内容                           | 因为惰性空间释放策略，复杂度为 O(1)                          |
+| sdscpy   | 将给定的C字符串复制到 SDS 中，覆盖 SDS 原有的字符串 | O(N)，N 为被复制的字符串长度                                 |
+
+
+
+## 参考
+
+- 《Redis设计与实现》
