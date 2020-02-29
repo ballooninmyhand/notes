@@ -46,7 +46,7 @@
 ### Redis
 
 - 数据结构与对象
-  - [string（字符串）](./Redis/数据结构与对象/string（字符串）.md)
+  - [string(字符串)](./Redis/数据结构与对象/string(字符串).md)
 
 
 
