@@ -16,12 +16,12 @@ string（字符串）是 `Redis` 中最常见的数据存储类型，其底层�
 
 ```c
 struct __attribute__ ((__packed__)) sdshdr16 {
-  	// 记录 buf 数组中已使用字节的数量
-  	// 等于 SDS 所保存字符串的长度
+    // 记录 buf 数组中已使用字节的数量
+    // 等于 SDS 所保存字符串的长度
     uint16_t len;
-  	// 排除头和空终止符以外分配的字节数量，表示字符串最大长度
+    // 排除头和空终止符以外分配的字节数量，表示字符串最大长度
     uint16_t alloc;
-  	// 表示 header 的类型
+    // 表示 header 的类型
     unsigned char flags;
     // 字节数组，用于保存字符串
     char buf[];
