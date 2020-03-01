@@ -64,17 +64,24 @@ struct __attribute__ ((__packed__)) sdshdr16 {
 
 下面是 SDS 的主要操作 API，也在 [sds.h](https://github.com/antirez/redis/blob/unstable/src/sds.h) 和 [sds.c](https://github.com/antirez/redis/blob/unstable/src/sds.c) 中定义：
 
-| API      | 作用                                                | 时间复杂度                                                   |
-| -------- | --------------------------------------------------- | ------------------------------------------------------------ |
-| sdslen   | 返回 SDS 的已使用空间字节数                         | 这个值可以通过读取 SDS 的 len 属性直接获得，复杂度为 O(1)    |
-| sdsavail | 返回 SDS 的未使用空间字节数                         | 这个值可以通过读取 SDS 的 len 和 alloc 属性计算获得，复杂度为 O(1) |
-| sdsalloc | 返回 SDS 的最大字节数                               | 这个值可以通过读取 SDS 的 alloc 属性直接获得，复杂度为 O(1)，sdsalloc() = sdsavail() + sdslen() |
-| sdsnew   | 创建一个包含给定字符串的 SDS                        | O(N)，N 为给定字符串的长度                                   |
-| sdsempty | 创建一个不包含任何内容的 SDS                        | O(1)                                                         |
-| sdsdup   | 创建一个给定 SDS 的副本                             | O(N)，N 为给定 SDS 的长度                                    |
-| sdsfree  | 释放给定的 SDS                                      | O(N)，N 为被释放的 SDS 的长度                                |
-| sdsclear | 清空 SDS 保存的字符串内容                           | 因为惰性空间释放策略，复杂度为 O(1)                          |
-| sdscpy   | 将给定的C字符串复制到 SDS 中，覆盖 SDS 原有的字符串 | O(N)，N 为被复制的字符串长度                                 |
+| API            | 作用                                                         | 时间复杂度                                                   |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| sdslen         | 返回 SDS 的已使用空间字节数                                  | 这个值可以通过读取 SDS 的 len 属性直接获得，复杂度为 O(1)    |
+| sdsavail       | 返回 SDS 的未使用空间字节数                                  | 这个值可以通过读取 SDS 的 len 和 alloc 属性计算获得，复杂度为 O(1) |
+| sdsalloc       | 返回 SDS 的最大字节数                                        | 这个值可以通过读取 SDS 的 alloc 属性直接获得，复杂度为 O(1)，sdsalloc() = sdsavail() + sdslen() |
+| sdsnew         | 创建一个包含给定字符串的 SDS                                 | O(N)，N 为给定字符串的长度                                   |
+| sdsnewlen      | 创建一个指定长度的 SDS，接受一个指定的 C 字符串作为初始化值  | O(N)，N 为给定字符串的长度                                   |
+| sdsempty       | 创建一个不包含任何内容的 SDS                                 | O(1)                                                         |
+| sdsdup         | 创建一个给定 SDS 的副本                                      | O(N)，N 为给定 SDS 的长度                                    |
+| sdsfree        | 释放给定的 SDS                                               | O(N)，N 为被释放的 SDS 的长度                                |
+| sdsupdatelen   | 更新 SDS 对应的 len 属性值                                   | O(1)                                                         |
+| sdsMakeRoomFor | 对给定的 SDS 对应的 buf 属性进行扩展                         | O(N)                                                         |
+| sdscatlen      | 将一个给定的 C 字符串追加到 SDS 的 buf 属性中                | O(N)，N 为给定 C 字符串的长度                                |
+| sdscpylen      | 将一个C字符串复制到sds中，需要依据sds的总长度来判断是否需要扩展 | O(N)，N 为给定 C 字符串的长度                                |
+| sdstrim        | 对给定 SDS，删除前端/后端在给定的 C 字符串中的字符           | O(M*N)，M 为 SDS 长度，N 为 C 字符串长度                     |
+| sdsrange       | 保留 SDS 指定区域内的数据，不在区间内的会被覆盖或清除        | O(N)，N 为被保留数据的字节数                                 |
+| sdsclear       | 清空 SDS 保存的字符串内容                                    | 因为惰性空间释放策略，复杂度为 O(1)                          |
+| sdscpy         | 将给定的C字符串复制到 SDS 中，覆盖 SDS 原有的字符串          | O(N)，N 为被复制的字符串长度                                 |
 
 
 
