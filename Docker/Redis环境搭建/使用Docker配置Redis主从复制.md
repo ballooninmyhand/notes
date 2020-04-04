@@ -74,7 +74,7 @@ replicaof redis-master 6379
 ```yaml
 version: "3"
 services:
-	# 主节点容器
+  # 主节点容器
   redis-master:
     image: redis:${REDIS_VERSION}
     container_name: redis-master
