@@ -23,6 +23,7 @@
 ### Mac
 
 - [mac安装sshpass连接ssh](./Mac/mac安装sshpass连接ssh.md)
+- [brew安装软件包卡死](./Mac/brew安装软件包卡死.md)
 
 
 
