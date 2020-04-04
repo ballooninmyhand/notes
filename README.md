@@ -1,15 +1,10 @@
-### notes
-
-学习笔记
-
-
-
 ### Docker
 
-- 快速构建服务环境
+- 快速构建PHP开发环境
   - [用Docker创建一个PHP镜像](./Docker/快速构建PHP开发环境/用Docker创建一个PHP镜像.md)
-  - [dnmp环境搭建](./Docker/快速构建PHP开发环境/dnmp环境搭建.md)
-  - [使用Docker配置Redis主从复制](./Docker/Redis环境搭建/使用Docker配置Redis主从复制.md)
+  - [dnmp环境搭建](<https://ballooninmyhand.github.io/dnmp/>)
+
+- [使用Docker配置Redis主从复制](./Docker/Redis环境搭建/使用Docker配置Redis主从复制.md)
 
 
 
@@ -62,7 +57,7 @@
   - [过期键删除策略](./Redis/单机数据库的实现/过期键删除策略.md)
   - [Redis持久化](./Redis/单机数据库的实现/Redis持久化.md)
 - 多机数据库的实现
-  - [复制](./Redis/多机数据库的实现/复制.md)
+  - [主从复制](./Redis/多机数据库的实现/复制.md)
   - [Sentinel](./Redis/多机数据库的实现/Sentinel.md)
 
 
