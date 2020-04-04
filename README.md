@@ -7,8 +7,9 @@
 ### Docker
 
 - 快速构建服务环境
-  - [用Docker创建一个PHP镜像](./Docker/快速构建服务环境/用Docker创建一个PHP镜像.md)
-  - [dnmp环境搭建](./Docker/快速构建服务环境/dnmp环境搭建.md)
+  - [用Docker创建一个PHP镜像](./Docker/快速构建PHP开发环境/用Docker创建一个PHP镜像.md)
+  - [dnmp环境搭建](./Docker/快速构建PHP开发环境/dnmp环境搭建.md)
+  - [使用Docker配置Redis主从复制](./Docker/Redis环境搭建/使用Docker配置Redis主从复制.md)
 
 
 
@@ -56,6 +57,7 @@
   - [Redis持久化](./Redis/单机数据库的实现/Redis持久化.md)
 - 多机数据库的实现
   - [复制](./Redis/多机数据库的实现/复制.md)
+  - [Sentinel](./Redis/多机数据库的实现/Sentinel.md)
 
 
 
