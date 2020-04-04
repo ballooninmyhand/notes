@@ -10,7 +10,14 @@
 
 ### Git
 
-- [Git常见问题及解决方法](./Git/Git常见问题及解决方法.md)
+- [Git忽略已加入版本库的文件](./Git/Git忽略已加入版本库的文件.md)
+- [Git忽略文件权限差异](./Git/Git忽略文件权限差异.md)
+
+
+
+### Github
+
+- [Github绑定域名](./Github/Github绑定域名.md)
 
 
 
