@@ -8,19 +8,19 @@
 
 ```shell
 .
-├── README.md												# 说明文档
-├── docker-compose-example.yml			# docker-compose 示例文件，由 docker-compose.yml 复制
-├── docker-compose.yml							# docker-compose 启动文件
-├── env.example											# 配置文件示例
-├── redis-master										# redis master 节点目录
-│   ├── conf												# 配置文件目录
-│   │   ├── redis.conf							# redis 配置文件
-│   │   └── start.sh								# 容器启动后执行脚本
-│   ├── data												# redis 数据集
+├── README.md                       # 说明文档
+├── docker-compose-example.yml      # docker-compose 示例文件，由 docker-compose.yml 复制
+├── docker-compose.yml              # docker-compose 启动文件
+├── env.example                     # 配置文件示例
+├── redis-master                    # redis master 节点目录
+│   ├── conf                        # 配置文件目录
+│   │   ├── redis.conf              # redis 配置文件
+│   │   └── start.sh                # 容器启动后执行脚本
+│   ├── data                        # redis 数据集
 │   │   └── dump.rdb
-│   └── log													# redis 日志
+│   └── log                         # redis 日志
 │       └── redis.log
-├── redis-slave-1										# redis slave 1 节点目录
+├── redis-slave-1                   # redis slave 1 节点目录
 │   ├── conf
 │   │   ├── redis.conf
 │   │   └── start.sh
@@ -28,7 +28,7 @@
 │   │   └── dump.rdb
 │   └── log
 │       └── redis.log
-└── redis-slave-2										# redis slave 2 节点目录
+└── redis-slave-2                   # redis slave 2 节点目录
     ├── conf
     │   ├── redis.conf
     │   └── start.sh
