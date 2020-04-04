@@ -13,6 +13,12 @@
 
 
 
+### Git
+
+- [Git常见问题及解决方法](./Git/Git常见问题及解决方法.md)
+
+
+
 ### Linux
 
 - [使用wkhtmltopdf将html文件转为pdf或图片](./Linux/使用wkhtmltopdf将html转为pdf或图片.md)
